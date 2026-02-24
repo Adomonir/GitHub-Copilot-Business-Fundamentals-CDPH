@@ -7,7 +7,7 @@
 By the end of this lab you will:
 
 1. **Plan** a repo‑wide rename from `globex_` → `chroma_` after a fictional acquisition.  
-2. **Generate** a fully‑working Python CLI that traverses the codebase and rewrites identifiers, file names, and config keys—all with Copilot *Ask* & *Edit*.  
+2. **Generate** a fully‑working Python CLI that traverses the codebase and rewrites identifiers, file names, and config keys—all with Copilot *Ask*, *Plan* & *Agent*.  
 3. **Automate** the change: unit tests, commit, PR creation, and review with Copilot Agent, PR Summaries, and Code Review.  
 4. **Ship** the refactor in < 10 minutes—turning a common task into a repeatable workflow.
 
@@ -41,7 +41,7 @@ Each file contains **~150 lines** peppered with `globex_` identifiers to give Co
 |------|---------|-----|
 | **Python** | 3.11+ | Runs the generated CLI & tests (3.9+ may have compatibility issues) |
 | **VS Code** (or JetBrains, Neovim) | Latest | IDE with GitHub Copilot & Chat |
-| **GitHub Copilot** | Business / Enterprise seat | Ask, Edit, Agent, Workspaces |
+| **GitHub Copilot** | Business / Enterprise seat | Ask, Plan, Agent, Workspaces |
 | **Git** | Any | So we can open the agent‑driven PR |
 
 > ℹ️ **Tip:** Confirm Copilot Chat works by typing `Hello Copilot` in the sidebar before you begin.
@@ -53,7 +53,7 @@ Each file contains **~150 lines** peppered with `globex_` identifiers to give Co
 | Phase | Copilot Features | Action Steps |
 |-------|------------------|--------------|
 | **1 Planning** | Chat, Spaces, Custom Instructions | *Scope impact* → `List files containing "globex_"`<br>*Draft a plan* → save to **Copilot Space (Optional)**<br>*Add repo instruction* → forbid magic numbers |
-| **2 Code Creation** | Ask, Edit, Workspaces, Model Picker | Open Issue → **Workspace** proposes tasks<br>Use **Ask** to create `rename.py`<br>Switch to *Claude 3 Sonnet* for fast tests<br>Refine with **Edit** (`skip node_modules`) |
+| **2 Code Creation** | Ask, Agent, Workspaces, Model Picker | Open Issue → **Workspace** proposes tasks<br>Use **Ask** to create `rename.py`<br>Switch to *Claude Haiku 4.5 or Claude Sonnet 4.5* for fast tests<br>Refine with **Agent** (`skip node_modules`) |
 | **3 Reviews** | Coding Agent, PR Summaries, Code Review | `@agent run rename.py & open PR`<br>Read **AI summary** & automated **review comments** |
 | **4 Testing** | Chat commands, Code completions | `@copilot run pytest -q`<br>Ask Chat: *Edge cases we missed?* |
 | **5 Deployment** | Chat in GitHub.com | Merge PR → `@copilot create follow‑up Issue` |
@@ -94,6 +94,7 @@ python -m pytest -q      # sanity check – should pass
 
 | Action | Exact prompt / click |
 |--------|----------------------|
+| **Change to PLAN Mode** | `Set the stage for the planning session` |
 | **Initial Scope** | `List all files containing "globex_"` |
 | **Full Assessment** | `@workspace List all files containing "globex_"` |
 | **Draft plan** | `Draft a plan to rename "globex_" → "chroma_" with backup, tests, CI gate, rollback.` |
@@ -113,12 +114,12 @@ python -m pytest -q      # sanity check – should pass
 3. **Lets Generate the Script** (ASK mode):
    - Create a new file in the cli directory named rename.py
    - Use prompt: `Generate a Python script that recursively renames any file or symbol starting with "globex_" to "chroma_", skip .git & node_modules, print summary.`
-4. **Show off the Model Picker** – select **Claude 3.5 Sonnet** → switch to Edit mode
-5. **Lets Refine the Script** (EDIT mode):
+4. **Show off the Model Picker** – select **Claude 4.5 Sonnet or Claude Haiku 4.5** → switch to Agent mode
+5. **Lets Refine the Script** (AGENT mode):
    ```
    @workspace #codebase Add pytest tests covering rename, binary‑skip, and --check dry‑run.
    ```
-6. **Refine the Script further** (EDIT mode):
+6. **Refine the Script further** (AGENT mode):
    ```
    @workspace #codebase Replace print with logger, add --check flag (dry‑run).
    ```
