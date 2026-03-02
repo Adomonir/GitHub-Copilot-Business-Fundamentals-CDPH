@@ -30,10 +30,9 @@ def read_lines(file_path: Path) -> Iterable[str]:
             for line in f:
                 yield line.strip()
     else:
-            with open(file_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    yield line.strip()
-    pass  # ← Copilot will fill this in
+        with open(file_path, "r", encoding="utf-8") as f:
+            for line in f:
+                yield line.strip()
 
 
 
@@ -53,8 +52,6 @@ def parse_line(line: str) -> Tuple[datetime, int, str] | None:
     timestamp = datetime.strptime(timestamp_str, "%d/%b/%Y:%H:%M:%S %z")
     timestamp_utc = timestamp.astimezone(timezone.utc)
     return timestamp_utc, status, path
-
-    pass  # ← Copilot will fill this in
 
 
 def triage(
@@ -85,9 +82,6 @@ def render(counter: Counter[Tuple[int, str]], top: int) -> None:
     print("|---:|---:|---|---:|")
     for i, ((status, path), hits) in enumerate(counter.most_common(top), start=1):
         print(f"| {i} | {status} | {path} | {hits} |")
-        
-
-    pass  # ← Copilot will fill this in
 
 
 
@@ -126,7 +120,7 @@ def main() -> int:
 
     if not counter:
         print("No matching log entries found.")
-        return 0
+        return 1
 
     render(counter, args.top)
     return 0
