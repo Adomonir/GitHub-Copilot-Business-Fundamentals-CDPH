@@ -4,10 +4,8 @@ Skips .git, node_modules, and binary files.
 Generates a summary table of changes.
 """
 
-import os
 import sys
 from pathlib import Path
-from collections import Counter
 from tabulate import tabulate
 
 
@@ -116,8 +114,8 @@ class ChromaRenamer:
                         self.stats['binary_files_skipped'] += 1
                         continue
                     
-                    self.rename_file(item)
                     self.rename_in_file_content(item)
+                    self.rename_file(item)
         except PermissionError:
             self.errors.append((directory, "Permission denied"))
             self.stats['errors'] += 1
