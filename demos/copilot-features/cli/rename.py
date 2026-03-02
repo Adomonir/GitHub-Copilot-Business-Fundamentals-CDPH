@@ -7,7 +7,6 @@ Generates a summary table of changes.
 import os
 import sys
 from pathlib import Path
-from collections import Counter
 from tabulate import tabulate
 
 
